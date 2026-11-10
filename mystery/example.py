@@ -6,6 +6,8 @@ map_connections = {
     "Lighthouse": ["Old Bridge"]
 }
 
+inventory = []
+
 energy = 5
 location = "Beach"
 
@@ -31,7 +33,34 @@ while game_running:
             print(f"Your location remains {location}. Energy remaining: {energy}")
 
     elif choice == "2":
-        print("Your inventory is empty.")
+        item = input("What item would you like to pick up? ").strip().title()
+        if item not in inventory:
+            inventory.append(item)
+            print(f"You have picked up {item}. Your inventory now contains: {inventory}")
+        else:
+            print(f"You already have {item} in your inventory.")
+
+        if location == "Beach":
+            # Allow the player to collect the Rope
+            if "Rope" not in inventory:
+                inventory.append("Rope")
+                print(f"You have picked up the Rope. Your inventory now contains: {inventory}")
+            else:
+                print("You already have the Rope in your inventory.")
+        else:
+            print("There is no Rope available here.")
+
+        if location == "Cave":
+            if "Lantern" not in inventory:
+                inventory.append("Lantern")
+                print(f"You have picked up Lantern. Your inventory now contains: {inventory}")
+            else:
+                print("You already have Lantern in your inventory.")
+        else:
+            print("There is no Lantern available here.")
+
+        for item in inventory:
+            print(f"You have {item} in your inventory.")
 
     elif choice == "3":
         print("Thanks for playing Mystery Island!")
@@ -39,3 +68,13 @@ while game_running:
 
     else:
         print("Invalid choice. Try again.")
+
+
+# Checks whether the inventory is empty.(if inventory: to check whether the list contains anything.)
+
+if inventory:
+    print("Your inventory contains:")
+    for item in inventory:
+        print(f"- {item}")
+else:
+    print("Your inventory is empty.")
